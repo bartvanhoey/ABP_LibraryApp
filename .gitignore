@@ -252,4 +252,4 @@ paket-files/
 *.sln.iml
 
 # Logfile
-*.Logs.txt
+**/Logs.txt
