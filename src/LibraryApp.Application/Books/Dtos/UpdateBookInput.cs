@@ -1,5 +1,10 @@
+using Abp.AutoMapper;
+using LibraryApp.Models;
+
 namespace LibraryApp.Books.Dtos
 {
+    
+    [AutoMapTo(typeof(Book))]
     public class UpdateBookInput
     {
         public int Id { get; set; }

@@ -1,5 +1,10 @@
+using Abp.AutoMapper;
+using LibraryApp.Models;
+
 namespace LibraryApp.Books.Dtos
 {
+    [AutoMapFrom(typeof(Book))]
+
     public class GetBookOutput
     {
         public int Id { get; set; }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.Application.Services;
-using AutoMapper;
+using Abp.ObjectMapping;
 using LibraryApp.Books.Dtos;
 using LibraryApp.Models;
 
@@ -10,28 +10,30 @@ namespace LibraryApp.Books
     public class BookAppService : ApplicationService, IBookAppService
     {
         private readonly IBookManager _bookManager;
+        private readonly IObjectMapper _mapper;
 
-        public BookAppService(IBookManager bookManager)
+        public BookAppService(IBookManager bookManager, IObjectMapper mapper)
         {
             _bookManager = bookManager;
+            _mapper = mapper;
         }
 
         public IEnumerable<GetBookOutput> ListAll()
         {
             var books = _bookManager.GetAllList();
-            var output = Mapper.Map<IEnumerable<Book>, IEnumerable<GetBookOutput>>(books);
+            var output = _mapper.Map<IEnumerable<GetBookOutput>>(books);
             return output;
         }
 
         public async Task Create(CreateBookInput input)
         {
-            var book = Mapper.Map<CreateBookInput, Book>(input);
+            var book = _mapper.Map<Book>(input);
             await _bookManager.Create(book);
         }
 
         public void Update(UpdateBookInput input)
         {
-            var book = Mapper.Map<UpdateBookInput, Book>(input);
+            var book = _mapper.Map<Book>(input);
             _bookManager.Update(book);
         }
 
@@ -43,7 +45,7 @@ namespace LibraryApp.Books
         public GetBookOutput GetBookById(GetBookInput input)
         {
             var book = _bookManager.GetBookById(input.Id);
-            var output = Mapper.Map<Book, GetBookOutput>(book);
+            var output = _mapper.Map<GetBookOutput>(book);
             return output;
         }
     }

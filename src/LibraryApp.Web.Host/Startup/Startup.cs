@@ -40,7 +40,7 @@ namespace LibraryApp.Web.Host.Startup
             ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             IdentityRegistrar.Register(services);
-            AuthConfigurer.Configure(services, _appConfiguration);
+          //  AuthConfigurer.Configure(services, _appConfiguration);
 
             services.AddSignalR();
 
